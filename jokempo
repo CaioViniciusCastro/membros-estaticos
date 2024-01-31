@@ -1,0 +1,70 @@
+namespace Atividade_jokempo;
+
+public class Cond_Vitoria_Jokempo
+{
+
+public String Jogador1 {get;set;}
+public String Jogador2 {get;set;}
+public String Resultado {get;set;}
+
+public string Cond_Vitoria(){
+if (Jogador1 == "Pedra" && Jogador2 == "Tesoura"){
+    Resultado = ("Jogador 1 venceu.");
+    return Resultado;
+}
+
+else if (Jogador1 == "Papel" && Jogador2 == "Pedra"){
+    Resultado = ("Jogador 1 venceu");
+    return Resultado;
+}
+
+else if (Jogador1 == "Tesoura" && Jogador2 == "Papel"){
+    Resultado = ("Jogador 1 venceu");
+    return Resultado;
+}
+
+else if (Jogador2 == "Pedra" && Jogador1 == "Tesoura"){
+    Resultado = ("Jogador 2 venceu.");
+    return Resultado;
+}
+
+else if (Jogador2 == "Papel" && Jogador1 == "Pedra"){
+    Resultado = ("Jogador 2 venceu.");
+    return Resultado;
+}
+
+else if (Jogador2 == "Tesoura" && Jogador1 == "Papel"){
+    Resultado = ("Jogador 2 venceu.");
+    return Resultado;
+}
+
+else{
+    Resultado = ("Erro ou Empate, tente novamente.");
+    return Resultado;
+}
+
+}
+}
+
+
+
+
+using Atividade_jokempo;
+
+Console.WriteLine("Boas vindas ao Jokempo do Caio!!");
+
+Console.WriteLine("Quantas rodadas seu jogo terá?");
+int num_rodada = int.Parse(Console.ReadLine());
+
+for (int i = 0;i<num_rodada;i++){
+
+Cond_Vitoria_Jokempo a = new Cond_Vitoria_Jokempo();
+// desenvolver o desenrolar do jogo aqui
+Console.WriteLine("Jogador1: Digite (Pedra) para pedra, (Tesoura) para tesoura, e (Papel) para papel.");
+a.Jogador1 = Console.ReadLine();
+Console.WriteLine("Jogador1: Digite (Pedra) para pedra, (Tesoura) para tesoura, e (Papel) para papel.");
+a.Jogador2 = Console.ReadLine();
+
+Console.WriteLine(a.Cond_Vitoria());
+
+}
