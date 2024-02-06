@@ -1,0 +1,51 @@
+namespace Atividade_OITO;
+
+public class Humano
+{
+
+public string Cor_Pele {get;set;}
+public double Altura {get;set;}
+public int Peso {get;set;}
+public string Profissao {get;set;}
+public string Nome {get;set;}
+
+
+public string Dados_Pessoais(){
+    return ($"Seus dados são:\n Nome: {Nome}.\n Altura: {Altura}.\n Peso: {Peso}.\n Cor de pele: {Cor_Pele}.\n Profissão: {Profissao}.");
+}
+
+}
+
+
+
+
+Humano a = new Humano();
+Console.WriteLine("Digite seu nome:");
+a.Nome = Console.ReadLine();
+Console.WriteLine("Digite seu altura:");
+a.Altura = double.Parse(Console.ReadLine());
+Console.WriteLine("Digite seu peso:");
+a.Peso = int.Parse(Console.ReadLine());
+Console.WriteLine("Digite sua cor de pele:");
+a.Cor_Pele = Console.ReadLine();
+Console.WriteLine("Digite sua profissão: (Medico-Advogado-Assasino de aluguel).");
+a.Profissao = Console.ReadLine();  
+
+Console.WriteLine(a.Dados_Pessoais());
+Console.WriteLine();
+
+var Rand = new Random();
+switch (a.Profissao){
+    case "Medico":
+        Console.WriteLine($"Você salvou {Rand.Next()} pessoas, deixou falecer {Rand.Next()} pessoas, e se aposentou com {Rand.Next(40,90)} anos.");
+        break;
+    case "Advogado":
+       Console.WriteLine($"Você defendeu {Rand.Next()} clientes, quase foi preso {Rand.Next()} vezes, e se aposentou com {Rand.Next(40,90)} anos.");
+        break;
+    case "Assasino de aluguel":
+        Console.WriteLine($"Você eliminou {Rand.Next()} alvos, disparou {Rand.Next()} tiros, e se aposentou com {Rand.Next(25,90)} anos.");
+        break;
+    default:
+        Console.WriteLine("Erro.");
+        break;
+}
