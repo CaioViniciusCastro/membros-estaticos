@@ -1,0 +1,50 @@
+[TestFixture]
+public class CalculatorTest{
+    private Calculator calculator;
+
+    [Setup]
+    public void Setup{
+        calculator = new Calculator();
+    }
+
+    [Test]
+    public void Add(){
+        int a = 5;
+        int b = 5; 
+
+        resultado = Calculator.Add(a,b);
+
+        Assert.AreEqual(8, resultado);
+    }
+
+    [Test]
+    public void Subtract(){
+        int a = 5;
+        int b = 5;
+
+        resultado = Calculator.Subtract(a,b);
+
+        Assert.AreEqual(0, resultado);
+    }
+
+    [Test]
+    public void Multiply(){
+        int a = 5;
+        int b = 5;
+
+        resultado = Calculator.Multiply(a,b);
+
+        Assert.AreEqual(25, resultado);
+    }
+
+    [Test]
+    public void Divide(){
+        int a = 5;
+        int b = 5;
+
+        resultado = Calculator.Divide(a, b);
+
+        Assert.AreEqual(1, resultado);
+    }
+
+}
