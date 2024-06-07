@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>Boas-Vindas ao nosso jogo da forca!</h1>
+
+
+<p id="randomword">Palavra aleatorizada aqui:</p>
+<button id="buttonrandomword"></button>
+    
+
+<script>    
+//criar lista
+const nomes = ['maio', 'ralo', 'bala', 'mala'];
+
+//criar função para randomizar palavra da lista
+
+document.getElementById("buttonrandomword").addEventListener("click", function Randomword(){
+    
+    let palavraEscolhida = nomes[Math.floor(Math.random()* nomes.length)]
+    document.getElementById("randomword").innerHTML = palavraEscolhida
+})
+</script>
+
+//criar função para iniciar o jogo
+<input type="text" id="oi">
+
+
+//criar função de acertos
+
+//criar função de erros
+
+//chamar todas as funções de forma harmonica
+</body>
+</html>
