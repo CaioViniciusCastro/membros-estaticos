@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Untitled-1 CSS.css">
+</head>
+<body>
+
+<div id="Exercicio1">
+
+<p>Escreva seu nome:</p>
+<input type="text" id="Texto1" value="">
+<button onclick="Myfunction()">Confirmar</button>
+<p>Seu nome é:</p>
+<p id= "nome"></p>
+
+<script>
+    function Myfunction(){
+var resposta_nome = document.getElementById("Texto1").value;
+document.getElementById("nome").innerHTML = resposta_nome;
+    }
+</script>
+
+</div>
+
+
+
+<div id="Exercicio2">
+
+<p>Escolha seu dado:<br> 1-D6 2-D8 3-D20</p>
+
+<input type="text" id="Texto2" value="">
+<button onclick="Myfunction2()">Confirmar</button>
+
+<p>Seu número selecionado é:</p>
+<p id="num_selecionado" ></p>
+<script>
+function Myfunction2(){
+let decisao = Number(document.getElementById("Texto2").value);
+if(decisao == 1){
+    let = Resp_d6= Math.floor(Math.random() * 7);
+</script>
+
+//inserir gif de um dado d6
+//inserir uma função para aleatorizar um número de 1 a 6
+//inserir um botao para rodar a função de aleatorizar um numero de 1 a 6
+
+}else if(decisao = 2){
+//inserir gif de um dado d8
+//inserir uma função para aleatorizar um número de 1 a 8
+//inserir um botao para rodar a função de aleatorizar um numero de 1 a 8
+
+}else if(decisao = 3){
+//inserir gif de um dado d20
+//inserir uma função para aleatorizar um número de 1 a 20
+//inserir um botao para rodar a função de aleatorizar um numero de 1 a 20
+
+}else{"tente novamente"}
+
+}
+</script>
+
+</div>
+
+
+</body>
+</html>
