@@ -5,53 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PART2</title>
+    <link href="arquivo_cadastro.css" rel="stylesheet">
 </head>
 <body>
     
 <p>Insira seu nome no campo abaixo.</p>
-<input type="text" id="Nome_user">
+<input type="text" id="Name_user">
 <p>Insira o ano de seu nascimento no campo abaixo</p>
-<input type="text" id="Data_nasc">
-<br>
+<input type="text" id="Data_born">
 <br>
 <br>
 
 <button onclick="Verificacao_idade()">Confirme suas informações aqui.</button>
 
-<p id="mensagem"></p>
+<p id="mensageVerification"></p>
 
 <script>
+let resultVerification;      //fora da função pois será usada para fazer a mediação do script com html
 function Verificacao_idade(){
 
-let data_nasc = Number(document.getElementById("Data_nasc").value);
-let nome_user = document.getElementById("Nome_user").value;
+let data_born = Number(document.getElementById("Data_born").value);      //dentro da função pois será usada apenas dentro do javascript
+let name_user = document.getElementById("Name_user").value;
 
-  if(data_nasc < 2006){
-    let resultado = ("Boas vindas senhor(a) "+(nome_user)+". \n Insira um nome de usuário e uma senha");
-    document.getElementById("mensagem").innerHTML = resultado;
-  }else if(data_nasc > 2005){
-    let resultado = ("Devido a não-maioridade, seu login não foi permitido.");
-    document.getElementById("mensagem").innerHTML = resultado;
+  if(data_born < 2006){
+    resultVerification = ("Boas vindas senhor(a) "+(name_user)+". \n Insira um nome de usuário e uma senha");
+    document.getElementById("mensageVerification").innerHTML = resultVerification;
+
+
+  }else if(data_born > 2005){
+    resultVerification = ("Devido a não-maioridade, seu login não foi permitido.");
+    document.getElementById("mensageVerification").innerHTML = resultVerification;
     return;
   }
 }
 </script>
 
-<div>
-<p>Nos informe seu nome de usuário:</p>
-<input type="text" id="Nome_usuario">
-<p>Nos informe sua senha:</p>
-<input type="text" id="Senha_usuario">
+<input type="text" id="Name_user_confirm">
+<input type="text" id="Senha_user_confirm">
 
 <button onclick="Dados_usuario()">Confirme suas informações aqui.</button>
+
+<p id="mensageConfirmation"></p>
 
 <script>
 function Dados_usuario(){
 
-let nome_usuario = document.getElementById("Nome_usuario").value;
-let senha_usuario = document.getElementById("Senha_usuario").value;
+let name_user_confirm = document.getElementById("Name_user_confirm").value;
+let senha_user_confirm = document.getElementById("Senha_user_confirm").value;
 
-const dados = {nomeUsuario:nome_usuario, senhaUsuario:senha_usuario};
+let resultConfirmation = ("Seus dados foram salvos.");
+document.getElementById("mensageConfirmation").innerHTML = resultConfirmation;
+
+const dados = {nomeUsuario:name_user_confirm, senhaUsuario:senha_user_confirm};
 }
 </script>
 
