@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script> 
+class Dispositivo{
+    constructor(modelo,categoria,serial,disponivel){
+        this.modelo = modelo;
+        this.categoria = categoria;
+        this.serial = serial;
+        this.disponivel = disponivel;
+    }
+
+emprestar(){
+    if (disponivel == true){
+        disponivel == false;
+        return "Empréstimo realizado.";
+    }else if (disponivel == false){
+        return "Empréstimo mal sucedido, produto não disponível.";
+    }
+}
+
+devolver(){
+    if (disponivel == false){
+    disponivel == true;
+    return "Produto devolvido com sucesso.";
+    }else if (disponivel == true){
+    return "Não há produtos para serem devolvidos.";
+    }
+}
+}
+class CentralDeEmprestimos{
+    constructor(inventario){
+    let inventario = [
+        {
+            "Modelo": modelo,
+            "Categoria": categoria,
+            "Serial": serial,
+            "Disponivel": disponivel
+        }
+    ]
+    this.inventario = inventario;
+    }
+
+    adicionarDispositivo(dispositivo){
+        inventario.splice (0, dispositivo);
+    }
+
+   /* verificarDispositivo(){
+        if (serial == serial){
+
+        };
+    }
+
+    emprestarDispositivo(serial){
+        if disponivel in serial == true
+    }
+
+    devolverDispositivo(){}
+}
+
+
+</script>
+</body>
+</html>
