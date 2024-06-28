@@ -15,49 +15,49 @@ class Dispositivo{
         this.disponivel = disponivel;
     }
 
+
 emprestar(){
-    if (disponivel == true){
-        disponivel == false;
+    if (this.disponivel === true){
+        this.disponivel = false;
         return "Empréstimo realizado.";
-    }else if (disponivel == false){
+    }else if (this.disponivel === false){
         return "Empréstimo mal sucedido, produto não disponível.";
     }
 }
 
 devolver(){
-    if (disponivel == false){
-    disponivel == true;
+    if (this.disponivel === false){
+        this.disponivel = true;
     return "Produto devolvido com sucesso.";
-    }else if (disponivel == true){
+    }else if (this.disponivel === true){
     return "Não há produtos para serem devolvidos.";
     }
 }
 }
-class CentralDeEmprestimos{
+
+class CentralDeEmprestimos extends Dispositivo{
     constructor(inventario){
-    let inventario = [
-        {
-            "Modelo": modelo,
-            "Categoria": categoria,
-            "Serial": serial,
-            "Disponivel": disponivel
+    this.inventario = {
+            "Modelo": this.modelo,
+            "Categoria": this.categoria,
+            "Serial": this.serial,
+            "Disponivel": this.disponivel
         }
-    ]
     this.inventario = inventario;
     }
 
     adicionarDispositivo(dispositivo){
-        inventario.splice (0, dispositivo);
+        inventario.splice (0, this.dispositivo);
     }
 
-   /* verificarDispositivo(){
+   verificarDispositivo(){
         if (serial == serial){
 
         };
     }
 
     emprestarDispositivo(serial){
-        if disponivel in serial == true
+        if (disponivel in serial == true){}
     }
 
     devolverDispositivo(){}
