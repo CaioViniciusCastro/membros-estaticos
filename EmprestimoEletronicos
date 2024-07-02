@@ -7,63 +7,79 @@
 </head>
 <body>
 <script> 
-class Dispositivo{
-    constructor(modelo,categoria,serial,disponivel){
+class Dispositivo {
+    constructor(modelo, categoria, serial, disponivel) {
         this.modelo = modelo;
         this.categoria = categoria;
         this.serial = serial;
         this.disponivel = disponivel;
     }
 
-
-emprestar(){
-    if (this.disponivel === true){
-        this.disponivel = false;
-        return "Empréstimo realizado.";
-    }else if (this.disponivel === false){
-        return "Empréstimo mal sucedido, produto não disponível.";
-    }
-}
-
-devolver(){
-    if (this.disponivel === false){
-        this.disponivel = true;
-    return "Produto devolvido com sucesso.";
-    }else if (this.disponivel === true){
-    return "Não há produtos para serem devolvidos.";
-    }
-}
-}
-
-class CentralDeEmprestimos extends Dispositivo{
-    constructor(inventario){
-    this.inventario = {
-            "Modelo": this.modelo,
-            "Categoria": this.categoria,
-            "Serial": this.serial,
-            "Disponivel": this.disponivel
+    emprestar() {
+        if (this.disponivel) {
+            this.disponivel = false;
+            return "Empréstimo realizado.";
+        } else {
+            return "Empréstimo mal sucedido, produto não disponível.";
         }
-    this.inventario = inventario;
     }
 
-    adicionarDispositivo(dispositivo){
-        inventario.splice (0, this.dispositivo);
+    devolver() {
+        if (!this.disponivel) {
+            this.disponivel = true;
+            return "Produto devolvido com sucesso.";
+        } else {
+            return "Não há produtos para serem devolvidos.";
+        }
     }
-
-   verificarDispositivo(){
-        if (serial == serial){
-
-        };
-    }
-
-    emprestarDispositivo(serial){
-        if (disponivel in serial == true){}
-    }
-
-    devolverDispositivo(){}
 }
 
+class CentralDeEmprestimos {
+    constructor() {
+        this.inventario = [];
+    }
 
+    adicionarDispositivo(dispositivo) {
+        this.inventario.push(dispositivo);
+    }
+
+    verificarDispositivo(serial) {
+        return this.inventario.find(dispositivo => dispositivo.serial === serial);
+    }
+
+    emprestarDispositivo(serial) {
+        const dispositivo = this.verificarDispositivo(serial);
+        if (dispositivo) {
+            return dispositivo.emprestar();
+        } else {
+            return "Dispositivo não encontrado no inventário.";
+        }
+    }
+
+    devolverDispositivo(serial) {
+        const dispositivo = this.verificarDispositivo(serial);
+        if (dispositivo) {
+            return dispositivo.devolver();
+        } else {
+            return "Dispositivo não encontrado no inventário.";
+        }
+    }
+}
+
+//exemplos de uso
+const central = new CentralDeEmprestimos();
+
+const dispositivo1 = new Dispositivo("ModeloA", "Categoria1", "1234", true);
+const dispositivo2 = new Dispositivo("ModeloB", "Categoria2", "5678", true);
+
+central.adicionarDispositivo(dispositivo1);
+central.adicionarDispositivo(dispositivo2);
+
+console.log(central.emprestarDispositivo("1234")); // Empréstimo realizado.
+console.log(central.emprestarDispositivo("1234")); // Empréstimo mal sucedido, produto não disponível.
+console.log(central.devolverDispositivo("1234")); // Produto devolvido com sucesso.
+console.log(central.devolverDispositivo("1234")); // Não há produtos para serem devolvidos.
+console.log(central.emprestarDispositivo("
 </script>
 </body>
 </html>
