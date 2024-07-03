@@ -79,7 +79,7 @@ console.log(central.emprestarDispositivo("1234")); // Empréstimo realizado.
 console.log(central.emprestarDispositivo("1234")); // Empréstimo mal sucedido, produto não disponível.
 console.log(central.devolverDispositivo("1234")); // Produto devolvido com sucesso.
 console.log(central.devolverDispositivo("1234")); // Não há produtos para serem devolvidos.
-console.log(central.emprestarDispositivo("
+console.log(central.emprestarDispositivo("9999")); // Dispositivo não encontrado no inventário.
 </script>
 </body>
 </html>
