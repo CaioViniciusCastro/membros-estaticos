@@ -30,7 +30,7 @@ let name_user = document.getElementById("Name_user").value;
   if(data_born < 2006){
     resultVerification = ("Boas vindas senhor(a) "+(name_user)+". \n Insira um nome de usuário e uma senha");
     document.getElementById("mensageVerification").innerHTML = resultVerification;
-
+    teste.setAtributte();
 
   }else if(data_born > 2005){
     resultVerification = ("Devido a não-maioridade, seu login não foi permitido.");
@@ -39,10 +39,10 @@ let name_user = document.getElementById("Name_user").value;
   }
 }
 </script>
-
+<div class="teste">
 <input type="text" id="Name_user_confirm">
 <input type="text" id="Senha_user_confirm">
-
+</div>
 <button onclick="Dados_usuario()">Confirme suas informações aqui.</button>
 
 <p id="mensageConfirmation"></p>
