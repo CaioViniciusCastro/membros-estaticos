@@ -1,0 +1,10 @@
+<p>Digite seu nome:</p>
+<input type="text" id="nome_usuario">
+<p id="mensagem_nome_usuario"></p>
+<button onclick="Nome()">Confirme seu nome aqui</button>
+<script>
+    function Nome(){
+    let i = document.getElementById("nome_usuario").value;
+    document.getElementById("mensagem_nome_usuario").innerHTML = i;
+    }
+    </script>
