@@ -1,0 +1,80 @@
+const fs = require('fs');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Função para criar diretórios caso não existam
+function criarPasta(criarPasta) {
+    fs.mkdir(criarPasta, (err) => {
+      if (err){
+        return console.error(`Erro ao criar a pasta: ${err}`);
+    };
+    console.log("Pasta criada com sucesso.")
+  });
+}
+
+// Função para escrever dados do profissional em um arquivo
+function escreverDados(pastaProfissao, nome, data) {
+    const filePath = path.join(pastaProfissao, `${nome}.txt`);
+    fs.writeFile(filePath, data, (err) => {
+      if (err){
+        return console.error(`Erro ao escrever o arquivo para ${nome}: ${err}`);
+    };
+      console.log(`Dados do profissional ${nome} gravados com sucesso!`);
+  });
+}
+
+// Função para solicitar e validar dados do usuário
+function fazerPergunta(question) {
+    rl.question(question, (answer) => {
+      if (answer.trim() === '') {
+        reject('Campo não pode estar vazio!');
+      } else {
+        resolve(answer.trim());
+      }
+    });
+  };
+
+
+async function getUserData() {
+  try {
+    // Solicitar dados ao usuário
+    const nome = await fazerPergunta('Informe seu nome: ');
+    const idade = parseInt(await fazerPergunta('Informe sua idade: '), 10);
+    if (isNaN(idade) || idade <= 0) throw new Error('Idade inválida!');
+
+    const telefone = await fazerPergunta('Informe seu telefone: ');
+    const endereco = await fazerPergunta('Informe seu endereço: ');
+    const profissao = await fazerPergunta('Informe sua profissão: ');
+
+    // Criação do diretório "Currículos" se não existir
+    await criarPasta('./Currículos');
+
+    // Criação do diretório com o nome da profissão, se não existir
+    const pastaProfissao = path.join('./Currículos', profissao);
+    await criarPasta(pastaProfissao);
+
+    // Formatar os dados para salvar no arquivo
+    const professionalData = `
+      Nome: ${nome}
+      Idade: ${idade}
+      Telefone: ${telefone}
+      Endereço: ${endereco}
+      Profissão: ${profissao}
+    `;
+
+    // Escrever os dados do profissional no arquivo
+    const mensagemSucesso = await escreverDados(pastaProfissao, nome, professionalData);
+    console.log(mensagemSucesso);
+
+// Testar com 5 submissões
+function comecarSubmissao() {
+  for (let i = 0; i < 5; i++) {
+    console.log(`\nSubmissão ${i + 1}:`);
+    await getUserData();
+  }
+}
+
+comecarSubmissao();
