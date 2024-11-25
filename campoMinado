@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campo Minado</title>
+    <title>Controle com Teclado em Tabuleiro 6x6</title>
     <style>
         #tabuleiro {
             display: grid;
+            grid-template-columns: repeat(6, 50px);
+            grid-template-rows: repeat(6, 50px);
             gap: 5px;
         }
         .celula {
@@ -16,67 +18,90 @@
             text-align: center;
             line-height: 50px;
             border: 1px solid black;
-            cursor: pointer;
         }
-        .revelado {
-            background-color: lightgray;
-            cursor: default;
+        .vitoria {
+            background-color: lightgreen;
+        }
+        .derrota {
+            background-color: lightcoral;
         }
     </style>
 </head>
 <body>
-    <h1>Campo Minado</h1>
-    <label for="tamanho">Escolha o tamanho do tabuleiro (Ex: 6 para 6x6): </label>
-    <input type="number" id="tamanho" min="2" max="10" value="6">
-    <button onclick="iniciarJogo()">Iniciar Jogo</button>
+    <h1>Controle o Caractere * com as Setas</h1>
     <div id="tabuleiro"></div>
     <p id="mensagem"></p>
 
     <script>
-        function iniciarJogo() {
-            const tamanho = parseInt(document.getElementById("tamanho").value);
-            const tabuleiro = document.getElementById("tabuleiro");
-            const mensagem = document.getElementById("mensagem");
-            tabuleiro.innerHTML = ''; // Limpa o tabuleiro anterior
-            mensagem.textContent = ''; // Limpa a mensagem anterior
+        const tabuleiro = document.getElementById("tabuleiro");
+        const tamanhoTabuleiro = 6;
+        let posicaoJogador = { x: 0, y: 0 };
+        const vitoria = { x: Math.floor(Math.random() * tamanhoTabuleiro), y: Math.floor(Math.random() * tamanhoTabuleiro) };
+        const derrota = { x: Math.floor(Math.random() * tamanhoTabuleiro), y: Math.floor(Math.random() * tamanhoTabuleiro) };
 
-            // Define o estilo do tabuleiro para corresponder ao tamanho escolhido
-            tabuleiro.style.gridTemplateColumns = `repeat(${tamanho}, 50px)`;
-            tabuleiro.style.gridTemplateRows = `repeat(${tamanho}, 50px)`;
+        while (vitoria.x === derrota.x && vitoria.y === derrota.y) {
+            derrota.x = Math.floor(Math.random() * tamanhoTabuleiro);
+            derrota.y = Math.floor(Math.random() * tamanhoTabuleiro);
+        }
 
-            // Gera um novo array com minas aleatórias
-            const numCelulas = tamanho * tamanho;
-            const minas = Array.from({ length: numCelulas }, () => Math.random() < 0.3 ? "*" : "");
-
-            // Cria as células do tabuleiro
-            minas.forEach((valor, index) => {
-                const celula = document.createElement("div");
-                celula.classList.add("celula");
-                celula.dataset.index = index;
-                celula.addEventListener("click", revelarCelula);
-                tabuleiro.appendChild(celula);
-            });
-
-            function revelarCelula(event) {
-                const celula = event.target;
-                const index = celula.dataset.index;
-
-                // Impede de clicar novamente em uma célula já revelada
-                if (celula.classList.contains("revelado")) return;
-
-                // Revela o conteúdo da célula
-                celula.textContent = minas[index];
-                celula.classList.add("revelado");
-
-                if (minas[index] === "*") {
-                    mensagem.textContent = "Você encontrou uma mina! Fim de jogo!";
-                    // Desabilita todas as células após encontrar uma mina
-                    Array.from(document.getElementsByClassName("celula")).forEach(cel => cel.removeEventListener("click", revelarCelula));
-                } else if (document.querySelectorAll(".celula:not(.revelado)").length === document.querySelectorAll(".celula[data-index='']:not(.revelado)").length) {
-                    mensagem.textContent = "Parabéns! Você venceu!";
+        function criarTabuleiro() {
+            for (let i = 0; i < tamanhoTabuleiro; i++) {
+                for (let j = 0; j < tamanhoTabuleiro; j++) {
+                    const celula = document.createElement("div");
+                    celula.classList.add("celula");
+                    celula.dataset.x = i;
+                    celula.dataset.y = j;
+                    tabuleiro.appendChild(celula);
                 }
             }
+            atualizarTabuleiro();
         }
+
+        function atualizarTabuleiro() {
+            document.querySelectorAll(".celula").forEach(celula => celula.textContent = "");
+            const jogador = document.querySelector(`.celula[data-x='${posicaoJogador.x}'][data-y='${posicaoJogador.y}']`);
+            jogador.textContent = "*";
+            verificarCondicoes(posicaoJogador.x, posicaoJogador.y);
+        }
+
+        function verificarCondicoes(x, y) {
+            if (x === vitoria.x && y === vitoria.y) {
+                document.getElementById("mensagem").textContent = "Você venceu!";
+                document.querySelector(`.celula[data-x='${x}'][data-y='${y}']`).classList.add("vitoria");
+                removerControles();
+            } else if (x === derrota.x && y === derrota.y) {
+                document.getElementById("mensagem").textContent = "Você perdeu!";
+                document.querySelector(`.celula[data-x='${x}'][data-y='${y}']`).classList.add("derrota");
+                removerControles();
+            }
+        }
+
+        function removerControles() {
+            document.removeEventListener("keydown", moverJogador);
+        }
+
+        function moverJogador(event) {
+            switch (event.key) {
+                case "ArrowUp":
+                    if (posicaoJogador.x > 0) posicaoJogador.x--;
+                    break;
+                case "ArrowDown":
+                    if (posicaoJogador.x < tamanhoTabuleiro - 1) posicaoJogador.x++;
+                    break;
+                case "ArrowLeft":
+                    if (posicaoJogador.y > 0) posicaoJogador.y--;
+                    break;
+                case "ArrowRight":
+                    if (posicaoJogador.y < tamanhoTabuleiro - 1) posicaoJogador.y++;
+                    break;
+                default:
+                    return;
+            }
+            atualizarTabuleiro();
+        }
+
+        criarTabuleiro();
+        document.addEventListener("keydown", moverJogador);
     </script>
 </body>
 </html>
